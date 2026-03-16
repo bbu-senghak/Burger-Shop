@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --hak-orange: #ff8a00;
+  --hak-orange-deep: #ff5e00;
+  --hak-ink: #111827;
+  --hak-muted: #6b7280;
+  --hak-card: rgba(255, 255, 255, 0.94);
+  --hak-border: #d9e0ea;
+}
+
+body.login-page {
+  font-family: "Poppins", sans-serif !important;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(255, 186, 77, 0.22), transparent 40%),
+    radial-gradient(circle at 88% 85%, rgba(255, 108, 43, 0.18), transparent 38%),
+    linear-gradient(140deg, #f5f7fb 0%, #eef2f7 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+body.login-page::before,
+body.login-page::after {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  border-radius: 999px;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+body.login-page::before {
+  width: 340px;
+  height: 340px;
+  top: -140px;
+  right: -90px;
+  background: radial-gradient(circle, rgba(255, 153, 0, 0.30) 0%, rgba(255, 153, 0, 0) 70%);
+}
+
+body.login-page::after {
+  width: 300px;
+  height: 300px;
+  bottom: -130px;
+  left: -70px;
+  background: radial-gradient(circle, rgba(255, 94, 0, 0.22) 0%, rgba(255, 94, 0, 0) 72%);
+}
+
+main.login-shell {
+  margin-top: 98px;
+  position: relative;
+  z-index: 1;
+}
+
+#login-form.login-card {
+  position: relative;
+  background: var(--hak-card) !important;
+  border: 1px solid var(--hak-border);
+  border-radius: 22px !important;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.14);
+  padding: 34px 34px 26px 34px !important;
+  margin: 1.4rem auto !important;
+  animation: loginCardEnter 0.55s ease both;
+}
+
+#login-form.login-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  border-radius: 22px 22px 0 0;
+  background: linear-gradient(90deg, var(--hak-orange) 0%, var(--hak-orange-deep) 100%);
+}
+
+.login-title {
+  margin-top: 4px;
+  font-size: 2.15rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.2px;
+  background: linear-gradient(100deg, #ff8a00 0%, #ff5e00 50%, #ff8a00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  text-shadow: 0 8px 20px rgba(255, 111, 0, 0.22);
+}
+
+.login-subtitle {
+  color: var(--hak-muted) !important;
+  font-size: 0.97rem;
+  font-weight: 500;
+}
+
+#login-form .form-label {
+  color: #1f2937 !important;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+#login-form .login-field {
+  height: 52px;
+  border: 1.5px solid #d0d8e4;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--hak-ink) !important;
+  font-size: 1.03rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+#login-form .login-field::placeholder {
+  color: #9aa3b0 !important;
+}
+
+#login-form .login-field:focus {
+  border-color: #ff8a00 !important;
+  box-shadow: 0 0 0 4px rgba(255, 138, 0, 0.16) !important;
+  transform: translateY(-1px);
+}
+
+#btn-login.login-btn {
+  border: none !important;
+  border-radius: 14px;
+  height: 52px;
+  font-size: 1.1rem;
+  letter-spacing: 0.6px;
+  background: linear-gradient(100deg, #ff8a00 0%, #ff5e00 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 12px 24px rgba(255, 102, 0, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+#btn-login.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(255, 102, 0, 0.36);
+  filter: saturate(1.05);
+}
+
+#btn-login.login-btn:active {
+  transform: translateY(0);
+}
+
+#msg-invalid-credentials {
+  font-weight: 600;
+}
+
+@keyframes loginCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 992px) {
+  main.login-shell {
+    margin-top: 88px;
+  }
+
+  #login-form.login-card {
+    padding: 26px 20px 20px 20px !important;
+    border-radius: 18px !important;
+  }
+
+  .login-title {
+    font-size: 1.75rem;
+  }
+}
+
+  
+  

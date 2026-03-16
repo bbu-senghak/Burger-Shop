@@ -1,0 +1,19 @@
+img {
+    height: 40% !important;
+    width: 40% !important;
+}
+
+input {
+    font-family: 'Source Sans 3', sans-serif !important;
+}
+
+span:hover {
+    cursor: pointer;
+}
+
+
+
+
+a {
+    text-decoration: none;
+}

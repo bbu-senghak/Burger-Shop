@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif !important;
+    color: #0C1525 !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.color-bg-primary {
+    background-color:  #ffa400 !important;
+}
+
+.color-bg-danger {
+    background-color: #FB0B24 !important;
+}
+
+.color-bg-white {
+    background-color: #FBFFFF !important;
+}
+
+.color-bg-light {
+    background-color: #F4E9FD !important;
+}
+
+.color-txt-white {
+    color: #FBFFFF !important;
+}
+
+.color-txt-primary {
+    color:  #ffa400 !important;
+}
+
+.color-txt-black {
+    color: #0C1525 !important;
+}
+
+.color-text-danger {
+    color: #FB0B24 !important;
+}
+
+.fs-14 {
+    font-size: 14px !important;
+}
+
+.w-60 {
+    width: 60%;
+}
+
+.h-60 {
+    height: 60%;
+}
+
+.h-55 {
+    height: 55%;
+}
+
+.form-control:focus {
+    background-color: #F4E9FD;
+    border-color: #ffa400;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px  #ffa400;
+    outline: 0 none;
+}
+
+.form-control::placeholder {
+    color: #0C1525 !important;
+}
+
+body {
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    animation: fadeInAnimation ease .5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

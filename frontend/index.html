@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAK Burger</title>
+    <link rel="icon" type="image" href="./asset/img/logo.png">
+    <link rel="stylesheet"
+  href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="./asset/css/style.css?v=20260315-contact-ui-1">
+     
+</head>
+<body>
+   
+    <header>
+        <a href="index.html" class="logo-wrap">
+            <img src="./asset/img/logo.png" alt="HAK Burger logo" class="logo" >
+        </a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+
+        <ul class="navbar">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About Us</a></li>
+            <li><a href="#menu" class="nav-link">Menu</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#contact" class="nav-link">Contact Us</a></li>
+            <li><a href="login.html" class="bttn">Login</a></li>
+            <li><div class="bx bx-moon" id="darkmode" title="Toggle dark mode"></div></li>
+        </ul>
+    </header>
+    
+    <section class="home" id="home">
+        <div class="home-text">
+            <br>
+            
+            <h1>Welcome</h1>
+            <h2>To HAK Burger</h2>
+            <a href="#menu" class="btn">View Menu</a>
+        </div>
+        <div class="home-img">
+            <img src="./asset/img/home.png" alt="">
+        </div>
+    </section>
+
+    
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="./asset/img/about.png" alt="">
+        </div>
+        <div class="about-text">
+            <span>About Us</span>
+            <h2>A Classic Experience</h2>
+            <p>HAK Burger offers a wide variety of distinctive and original burgers, 
+				alongside carefully selected local specialties.
+				While the menu and presentation have evolved over time, 
+				HAK’s core values and unwavering dedication to crafting delicious,
+				high-quality burgers remain unchanged.
+				With a passion for flavor and quality, 
+				HAK Burger continues to deliver exceptional taste to customers around the world.</p>
+            
+        </div>
+    </section>
+
+    
+    <section class="menu" id="menu">
+        <div class="heading">
+            <span>Menu</span>
+            <h2>Tasty menu of the week</h2>
+        </div>
+        <div class="menu-container">
+           
+            <div class="box">
+                <div class="box-img">
+                    <img src="./asset/img/menu1.png" alt="">
+                </div>
+                <h2>Cheese Burger (Large)</h2>
+                <span>riel 1000</span>
+                <i class='bx bx-cart-alt'></i>
+            </div>
+            
+            <div class="box">
+                <div class="box-img">
+                    <img src="./asset/img/menu2.png" alt="">
+                </div>
+                <h2>Submarine</h2>
+                <span>riel 900</span>
+                <i class='bx bx-cart-alt'></i>
+            </div>
+            
+            <div class="box">
+                <div class="box-img">
+                    <img src="./asset/img/menu3.png" alt="">
+                </div>
+                <h2>Chicken Burger</h2>
+                <span>riel 1400</span>
+                <i class='bx bx-cart-alt'></i>
+            </div>
+        </div>
+        <br>
+        <a href="#" class="menu-btn" align="center">View More</a>
+    </section>
+
+    
+    <section class="services" id="services">
+        <div class="heading">
+            <span>Services</span>
+            <h2>We provide best food services</h2>
+        </div>
+
+        <div class="servives-container">
+           
+            <div class="s-box">
+                <img src="./asset/img/order.png" alt="">
+                <h3>Order Your Favorites</h3>
+                <p>Explore our delicious selection of burgers and sides, each prepared to suit your personal taste.
+				Our user-friendly online ordering system makes the process quick and effortless, 
+				allowing you to move smoothly from browsing the menu to completing your order with ease.</p>
+            </div>
+            
+            <div class="s-box">
+                <img src="./asset/img/delivery-truck.png" alt="">
+                <h3>Shipping</h3>
+                <p>Fast and Fresh Delivery<br>
+                    Enjoy fast and reliable delivery straight to your door.
+					We focus on efficiency and careful handling to ensure your HAK Burger meal arrives fresh, hot, and ready to enjoy right on time.</p>
+            </div>
+            
+            <div class="s-box">
+                <img src="./asset/img/shipping.png" alt="">
+                <h3>Delivered</h3>
+                <p> Our delivery service brings the HAK Burger experience directly to your doorstep. 
+				Each order is freshly prepared and delivered promptly, ensuring your meal arrives hot, flavorful, 
+				and ready to enjoy—just as satisfying at home as it is in our restaurant.</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="connect" id="contact">
+        <div class="connect-shell">
+            <div class="connect-text">
+                <span>Let's Talk</span>
+                <h2>Contact Us</h2>
+                <p>Questions about menu items, orders, or service? Send us a message and we will respond quickly.</p>
+                <div class="contact-pill-list">
+                    <div class="contact-pill"><i class='bx bx-time-five'></i><span>Fast support</span></div>
+                    <div class="contact-pill"><i class='bx bx-shield-quarter'></i><span>Secure form</span></div>
+                    <div class="contact-pill"><i class='bx bx-check-circle'></i><span>Friendly team</span></div>
+                </div>
+            </div>
+
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="What can we help with?" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Type your message..." required></textarea>
+                </div>
+                <button type="submit" id="contact-submit-btn">Send Message</button>
+                <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
+            </form>
+        </div>
+    </section>
+    
+    
+
+    
+    <section class="contact" id="contact-info">
+        <div class="contact-box">
+            <h3>HAK BURGER</h3>
+            <span>Follow Us</span>
+            <div class="social">
+                <a href="#"><i class='bx bxl-facebook' ></i></a>
+                <a href="#"><i class='bx bxl-twitter' ></i></a>
+                <a href="#"><i class='bx bxl-instagram' ></i></a>
+				<a href="#"><i class='bx bxl-telegram' ></i></a>
+            </div>
+        </div>
+        <div class="contact-box">
+            <h3>Menu</h3>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </div>
+        
+        <div class="contact-box address">
+            <h3>Address & Contact</h3>
+            <i class='bx bxs-map' ><span>#107 St.21 Koh Pich, Phnom Penh, Cambodia</span></i>
+            <i class='bx bxs-phone' ><span>+855 76 26 27 288</span></i>
+            <i class='bx bxs-envelope' ><span>senghakpro@gmail.com</span></i>
+        </div>
+    </section>
+
+    
+    <div class="copyright">
+        <p>&#169;HAK Burger | 2026 </p>
+    </div>
+
+
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+   
+    <script src="./asset/js/main.js?v=20260315-contact-db-2"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.filter-buttons {
+    margin: 20px 0;
+}
+
+.filter-btn {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.item-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-box {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.item-box img {
+    max-width: 100%;
+    height: auto;
+}
+
+.item-box button {
+    margin: 5px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.item-box .edit-btn {
+    background-color: #007bff;
+}
+
+.item-box .delete-btn {
+    background-color: #dc3545;
+}
+
+.dialog {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.expired-warning {
+    color: red;
+    font-weight: bold;
+}
+
+#add-item-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-item-btn:hover {
+    background-color: #0056b3;
+}
+
+#edit-form button[type="submit"] {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#edit-form button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+#add-form button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 400px;
+   
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form input[type="date"],
+form select {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="number"]:focus,
+form input[type="date"]:focus,
+form select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+form button[type="submit"] {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+}
+
+
+#add-form button[type="submit"] {
+    background-color: #007bff;
+}
+
+#add-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+#edit-form button[type="submit"] {
+    background-color: #28a745;
+}
+
+#edit-form button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+
+.dialog {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.dialog-content {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 350px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.dialog-content h2 {
+    margin-bottom: 10px;
+}
+
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #333;
+}
+
+
+

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="icon" type="image" href="./asset/img/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./asset/css/admin.css?v=20260315-fix">
+    <link rel="stylesheet" href="./asset/css/item.css?v=20260315-28">
+</head>
+<body>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar">
+        
+        <a href="index.html">
+            <img src="./asset/img/logo.png" alt="HAK Burger Logo" class="logo">
+        </a>
+        <ul>
+            <li><a href="#contact-messages" onclick="showSection('contactMessages')">MESSAGES <span id="contact-message-badge" class="contact-message-badge">0</span></a></li>
+            <li><a href="#home" onclick="showSection('home')">HOME</a></li>
+            <li><a href="#staff" onclick="showSection('staff')">STAFF</a></li>
+            <li><a href="#customers" onclick="showSection('customers')">CUSTOMERS</a></li>
+            <li><a href="#orders" onclick="showSection('orders')">ORDERS</a></li>
+            <li><a href="#items" onclick="showSection('items')">STOCK</a></li>
+            <li><a href="#reports" onclick="showSection('reports')">REPORTS</a></li>
+            <li><a href="#change-password" onclick="showSection('changePassword')">CHANGE PASSWORD</a></li>
+            
+
+            <li>
+                <button id="btn-logout" class="logout-link" onclick="logout()">Logout</button>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="main-content">
+        
+        <h1>Admin Dashboard</h1>
+        
+        <section id="home" class="content-section">
+            
+            <h2>Menu</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="ALL">ALL</button>
+                <button class="filter-btn" data-category="Burgers">Burgers</button>
+                <button class="filter-btn" data-category="Submarines">Submarines</button>
+                <button class="filter-btn" data-category="Fries">Fries</button>
+                <button class="filter-btn" data-category="Pasta">Pasta</button>
+                <button class="filter-btn" data-category="Chicken">Chicken</button>
+                <button class="filter-btn" data-category="Beverages">Beverages</button>
+            </div>
+            <div class="item-container" id="home-item-container">
+                
+            </div>
+            <button id="cart-toggle"><i class="fa fa-shopping-cart"></i></button>
+            <div class="cart">
+                
+                <h3>Cart</h3>
+                <label for="customer-select">Select Customer:</label>
+                <select id="customer-select">
+                    
+                </select>
+                <div id="cart-sidebar">
+                    <ul id="cart-items">
+                        
+                    </ul>
+                    <div id="cart-summary">
+                        <p>Total: <span id="total-price">0.00</span></p>
+                        <p>Discount: <span id="discount-price">0.00</span></p>
+                        <p>Final Total: <span id="final-total-price">0.00</span></p>
+                    </div>
+                    <button id="send-order-btn">Send to Orders</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contactMessages" class="content-section">
+            <h2>Messages</h2>
+            <div class="contact-message-panel">
+                <div class="contact-message-toolbar">
+                    <input type="text" id="contact-search-input" placeholder="Search by name, email, phone, subject, or message" onkeyup="searchContactMessagesInView()">
+                    <button type="button" onclick="searchContactMessagesInView()">Search</button>
+                    <button type="button" onclick="clearContactMessagesSearch()">Clear</button>
+                    <button type="button" onclick="refreshContactMessages()">Refresh</button>
+                    <button type="button" onclick="markAllContactMessagesAsRead()">Mark All Read</button>
+                </div>
+                <p id="contact-message-count" class="contact-message-count">Showing 0 messages</p>
+                <div class="contact-message-table-wrap">
+                    <table id="contact-messages-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date & Time</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <p id="contact-message-status" class="contact-message-status"></p>
+            </div>
+        </section>
+        
+        
+        
+        
+        <section id="staff" class="content-section">
+            
+            <h2 class="staff-section-title">Staff Management</h2>
+            <p class="staff-section-subtitle">Manage team profiles and account access from one screen.</p>
+            <div class="staff-buttons">
+                <button class="staff-cta-btn" onclick="showModalContent('addStaff')">
+                    <i class="fa fa-user-plus"></i>
+                    <span>Add Staff</span>
+                </button>
+            </div>
+            <div id="staffModalContent" class="modal-content staff-live-panel">
+                
+            </div>
+        </section>
+
+
+        <section id="customers" class="content-section">
+            
+            <h2>Customer Management</h2>
+            <div class="customer-buttons">
+                <button onclick="showSection('home')" style="background-color: #64748b;">
+                    <i class="fa fa-arrow-left"></i>
+                    <span>BACK</span>
+                </button>
+                <button onclick="showModalContent('addCustomer')">
+                    <i class="fa fa-user-plus"></i>
+                    <span>ADD CUSTOMER</span>
+                </button>
+            </div>
+            <div id="customerModalContent" class="modal-content customer-live-panel">
+                
+            </div>
+        </section>
+
+        
+        <section id="orders" class="content-section">
+            
+            <h2>Order Details</h2>
+            <input type="text" id="search-bar" placeholder="Search by customer ID, name, or order ID">
+              <button id="search-btn">Search</button>
+              <button id="clear-search-btn">Clear</button>
+              <div class="total-summary">
+                <b><p class="discount-price">Discount Price: KHR. X</p></b>
+                <b><p class="final-total-price">Final Total: KHR. Y</p></b>
+            </div>
+            <table id="orders-table">
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Customer Code</th>
+                        <th>Customer Name</th>
+                        <th>Items</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            
+        </section>
+        
+        <div id="home-item-container">
+            
+        </div>
+        
+        <section id="items" class="content-section">
+            
+            <h2>Stock Management</h2>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="ALL">ALL</button>
+                <button class="filter-btn" data-category="Burgers">Burgers</button>
+                <button class="filter-btn" data-category="Submarines">Submarines</button>
+                <button class="filter-btn" data-category="Fries">Fries</button>
+                <button class="filter-btn" data-category="Pasta">Pasta</button>
+                <button class="filter-btn" data-category="Chicken">Chicken</button>
+                <button class="filter-btn" data-category="Beverages">Beverages</button>
+            </div>
+            <button id="add-item-btn">Add New Stock</button>
+            <div class="item-container" id="item-container">
+                
+            </div>
+        
+            
+            <div id="edit-dialog" class="dialog">
+                <div class="dialog-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>Edit Stock</h2>
+                    <form id="edit-form">
+                        <input type="hidden" id="edit-item-id">
+                        <label for="edit-item-code">Item Code:</label>
+                        <input type="text" id="edit-item-code" name="itemCode" readonly>
+                        <label for="edit-item-category">Category:</label>
+                        <div style="display: flex; gap: 10px;">
+                            <select id="edit-item-category" name="category" required style="flex: 1;">
+                                <option value="Burgers">Burgers</option>
+                                <option value="Submarines">Submarines</option>
+                                <option value="Fries">Fries</option>
+                                <option value="Pasta">Pasta</option>
+                                <option value="Chicken">Chicken</option>
+                                <option value="Beverages">Beverages</option>
+                            </select>
+                            <button type="button" onclick="addNewCategory('edit-item-category')" style="width: auto; padding: 0 15px;">+ New</button>
+                        </div>
+                        <label for="edit-item-name">Item Name:</label>
+                        <input type="text" id="edit-item-name" name="itemName">
+                        <label for="edit-item-price">Price:</label>
+                        <input type="number" id="edit-item-price" name="price" step="0.01">
+                        <label for="edit-item-discount">Discount:</label>
+                        <input type="number" id="edit-item-discount" name="discount" step="0.01">
+                        <label for="edit-item-quantity">Quantity (Stock In):</label>
+                        <input type="number" id="edit-item-quantity" name="quantity" min="0" required>
+                        <label for="edit-item-image">Image URL:</label>
+                        <div class="image-upload-row">
+                            <input type="text" id="edit-item-image" name="image">
+                            <button type="button" id="edit-item-image-upload-btn">Upload Image</button>
+                            <input type="file" id="edit-item-image-file" accept="image/*" style="display:none;">
+                        </div>
+                        <img id="edit-item-image-preview" class="item-image-preview" alt="Edit item preview" style="display:none;">
+                        <label for="edit-item-expiry">Expiry Date:</label>
+                         <input type="date" id="edit-item-expiry" />
+                        <button type="submit">Save</button><br>
+                    </form>
+                </div>
+            </div>
+        
+            
+        <div id="add-dialog" class="dialog">
+            <div class="dialog-content">
+                <span class="close-btn" id="close-add-dialog">&times;</span>
+                <h2>Add New Stock</h2>
+                <form id="add-form">
+                    <label for="add-item-category">Category:</label>
+                    <div style="display: flex; gap: 10px;">
+                        <select id="add-item-category" name="category" required style="flex: 1;">
+                            <option value="Burgers">Burgers</option>
+                            <option value="Submarines">Submarines</option>
+                            <option value="Fries">Fries</option>
+                            <option value="Pasta">Pasta</option>
+                            <option value="Chicken">Chicken</option>
+                            <option value="Beverages">Beverages</option>
+                        </select>
+                        <button type="button" onclick="addNewCategory('add-item-category')" style="width: auto; padding: 0 15px;">+ New</button>
+                    </div>
+                    <label for="add-item-code">Item Code:</label>
+                    <input type="text" id="add-item-code" name="itemCode" required>
+                    <label for="add-item-name">Item Name:</label>
+                    <input type="text" id="add-item-name" name="itemName" required>
+                    <label for="add-item-price">Price:</label>
+                    <input type="number" id="add-item-price" name="price" step="0.01" required>
+                    <label for="add-item-discount">Discount:</label>
+                    <input type="number" id="add-item-discount" name="discount" step="0.01">
+                    <label for="add-item-quantity">Quantity (Stock In):</label>
+                    <input type="number" id="add-item-quantity" name="quantity" min="0" required>
+                    <label for="add-item-image">Image URL:</label>
+                    <div class="image-upload-row">
+                        <input type="text" id="add-item-image" name="image" required>
+                        <button type="button" id="add-item-image-upload-btn">Upload Image</button>
+                        <input type="file" id="add-item-image-file" accept="image/*" style="display:none;">
+                    </div>
+                    <img id="add-item-image-preview" class="item-image-preview" alt="Add item preview" style="display:none;">
+                    <label for="add-item-expiry">Expiry Date:</label>
+                    <input type="date" id="add-item-expiry" />
+                    
+                    <button type="submit">Add Stock</button><br>
+                </form>
+            </div>
+        </div>
+        </section>
+        
+        <section id="reports" class="content-section">
+            <h2>Report Details</h2>
+            <div class="report-buttons">
+                <button id="monthly-report-btn">Monthly Sales Report</button>
+                <button id="annual-report-btn">Annual Sales Report</button>
+                <button id="top-customers-btn">Top Customers of the Month</button>
+                <button id="food-items-report-btn">Food Items Count Report</button>
+                <button id="inventory-report-btn">Inventory Status Report</button>
+            </div>
+            <div id="report-output">
+                <!-- Monthly Sales Report -->
+                <div id="monthly-report" class="report-section">
+                    <div class="report-section-head">
+                        <h3>Monthly Sales Report</h3>
+                        <button type="button" class="print-report-btn" onclick="printMonthlyReport()">Printe Monthly Report</button>
+                    </div>
+                    <p id="monthly-report-note" class="report-note">Generate report to view current month sales.</p>
+                    <table id="monthly-report-table">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Total Price</th>
+                                <th>Total Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!-- Annual Sales Report -->
+                <div id="annual-report" class="report-section">
+                    <div class="report-section-head">
+                        <h3>Annual Sales Report</h3>
+                        <button type="button" class="print-report-btn" onclick="printAnnualReport()">Printe Annual Report</button>
+                    </div>
+                    <p id="annual-report-note" class="report-note">Generate report to view this year performance.</p>
+                    <table id="annual-report-table">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Total Sales Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!-- Top Customers Report -->
+                <div id="top-customers-report" class="report-section">
+                    <div class="report-section-head">
+                        <h3>Top Customers of the Month</h3>
+                        <button type="button" class="print-report-btn" onclick="printTopCustomersReport()">Printe Top Customers</button>
+                    </div>
+                    <p id="top-customers-note" class="report-note">Generate report to see highest value customers.</p>
+                    <table id="top-customers-table">
+                        <thead>
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>Customer Name</th>
+                                <th>Total Spent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!-- Food Items Count Report -->
+                <div id="food-items-report" class="report-section">
+                    <div class="report-section-head">
+                        <h3>Food Items Count Report</h3>
+                        <button type="button" class="print-report-btn" onclick="printFoodItemsReport()">Printe Food Items Report</button>
+                    </div>
+                    <p id="food-items-note" class="report-note">Generate report to view top sold menu items.</p>
+                    <table id="food-items-table">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Total Sold</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!-- Inventory Status Report -->
+                <div id="inventory-report" class="report-section" style="display:none;">
+                    <div class="report-section-head">
+                        <h3>Inventory Status Report</h3>
+                        <button type="button" class="print-report-btn" onclick="printInventoryReport()">Print Inventory Report</button>
+                    </div>
+                    <p id="inventory-report-note" class="report-note">Generate report to view current stock vs sold stock.</p>
+                    <table id="inventory-report-table">
+                        <thead>
+                            <tr>
+                                <th>Item Code</th>
+                                <th>Item Name</th>
+                                <th>Current Stock (In)</th>
+                                <th>Total Sold (Out)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="changePassword" class="content-section" style="display:none;">
+            <h2>Change Password</h2>
+            <form id="ownChangePasswordForm" onsubmit="event.preventDefault(); submitOwnPasswordChange();" style="max-width: 400px; margin-top: 20px;">
+                <p style="margin-bottom: 15px; color: #64748b;">Enter your new password below. It must be at least 6 characters long.</p>
+                <label for="myNewPassword">New Password:</label>
+                <input type="password" id="myNewPassword" name="myNewPassword" required minlength="6" style="width: 100%; padding: 10px; margin: 8px 0 20px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 14px; font-family: inherit;">
+                <button type="submit" style="width: 100%; background: #2563eb; color: white; border: none; padding: 12px; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-lock"></i> Update Password</button>
+            </form>
+        </section>
+
+           
+
+          
+   
+
+        
+    </div>
+
+    
+    <div id="addStaff" class="modal-template" style="display:none;">
+        <h2>Add Staff Member</h2>
+        <form id="addStaffForm" onsubmit="event.preventDefault(); addStaffMember();">
+            <div style="max-height: 50vh; overflow-y: auto; padding-right: 10px;">
+                <label for="staffId">Staff Member ID:</label>
+                <input type="text" id="staffId" value="Auto-generated by database on save" readonly disabled>
+                <label for="staffRole">Role:</label>
+                <select id="staffRole" name="staffRole" required>
+                    <option value="staff">Staff</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <label for="staffUsername">Login Username:</label>
+                <input type="text" id="staffUsername" name="staffUsername" required>
+                <label for="mobileNumber">Enter Mobile Number:</label>
+                <input type="text" id="mobileNumber" name="mobileNumber" required>
+                <label for="staffName">Staff Member Name:</label>
+                <input type="text" id="staffName" name="staffName" required>
+                <label for="staffAddress">Staff Member Address:</label>
+                <input type="text" id="staffAddress" name="staffAddress" required>
+                <label for="staffNID">Staff Member NID:</label>
+                <input type="text" id="staffNID" name="staffNID" required>
+            </div>
+            <div style="display: flex; gap: 15px; margin-top: 20px; width: 100%;">
+                <button type="button" onclick="showStaffButtons()" style="flex: 1; background-color: #64748b; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-arrow-left"></i> Back</button>
+                <button type="submit" style="flex: 2; background-color: #2563eb; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-user-plus"></i> Add Staff</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="updateStaff" class="modal-template" style="display:none;">
+        <h2>Update Staff Member</h2>
+        <form id="updateStaffForm" onsubmit="event.preventDefault(); updateStaffMember();">
+            <label for="updateStaffId">Staff Member ID:</label>
+            <input type="text" id="updateStaffId" name="updateStaffId" required>
+            <button type="button" onclick="fetchAndShowStaff('update')">Fetch Details</button>
+            <div id="updateStaffDetails" style="max-height: 50vh; overflow-y: auto; padding-right: 10px;"></div>
+            <div style="display: flex; gap: 15px; margin-top: 20px; width: 100%;">
+                <button type="button" onclick="showStaffButtons()" style="flex: 1; background-color: #64748b; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-arrow-left"></i> Back</button>
+                <button type="submit" style="flex: 2; background-color: #2563eb; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-pen"></i> Update Staff</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="deleteStaff" class="modal-template" style="display:none;">
+        <h2>Disable Staff Member</h2>
+        <form id="deleteStaffForm" onsubmit="event.preventDefault(); disableStaffMember();">
+            <label for="deleteStaffId">Staff Member ID:</label>
+            <input type="text" id="deleteStaffId" name="deleteStaffId" required>
+            <div style="display: flex; gap: 15px; margin-top: 20px; width: 100%;">
+                <button type="button" onclick="showStaffButtons()" style="flex: 1; background-color: #64748b; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-arrow-left"></i> Back</button>
+                <button type="submit" style="flex: 2; background-color: #ef4444; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-ban"></i> Disable Staff</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="viewStaff" class="modal-template" style="display:none;">
+        <div class="staff-view-head">
+            <div>
+                <h2>Staff Directory</h2>
+                <p class="staff-view-note">Quickly search, update, disable, and re-enable staff accounts.</p>
+            </div>
+            <div class="staff-summary-grid">
+                <div class="staff-summary-card">
+                    <span>Total Staff</span>
+                    <strong id="staffTotalCount">0</strong>
+                </div>
+                <div class="staff-summary-card active">
+                    <span>Active</span>
+                    <strong id="staffActiveCount">0</strong>
+                </div>
+                <div class="staff-summary-card disabled">
+                    <span>Disabled</span>
+                    <strong id="staffDisabledCount">0</strong>
+                </div>
+            </div>
+        </div>
+        <div class="staff-search-bar">
+            <input type="text" id="staffSearchInput" placeholder="Search by ID, Name, Username, Role, Mobile, Address, NID" onkeyup="searchStaffInView()">
+            <button type="button" onclick="searchStaffInView()">Search</button>
+            <button type="button" onclick="clearStaffSearch()">Clear</button>
+        </div>
+        <p id="staffSearchHint" class="staff-search-hint">Showing 0 staff</p>
+        <div class="staff-table-wrap">
+            <table id="staffList" class="staff-list">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Mobile</th>
+                        <th>Address</th>
+                        <th>NID</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="addCustomer" class="modal-template" style="display:none;">
+        <h2>Add Customer</h2>
+        <form id="addCustomerForm" onsubmit="event.preventDefault(); addCustomer();">
+            <label for="customerId">Customer ID:</label>
+            <input type="text" id="customerId" value="Auto-generated by database on save" readonly disabled>
+            <label for="customerName">Customer Name:</label>
+            <input type="text" id="customerName" name="customerName" required>
+            <label for="customerEmail">Customer Email:</label>
+            <input type="email" id="customerEmail" name="customerEmail" required>
+            <label for="customerPhone">Customer Phone:</label>
+            <input type="text" id="customerPhone" name="customerPhone" required>
+            <div style="display: flex; gap: 15px; margin-top: 20px; width: 100%;">
+                <button type="button" onclick="showCustomerButtons()" style="flex: 1; background-color: #64748b; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-arrow-left"></i> Back</button>
+                <button type="submit" style="flex: 2; background-color: #2563eb; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-user-plus"></i> Save Customer</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="updateCustomer" class="modal-template" style="display:none;">
+        <h2>Update Customer</h2>
+        <form id="updateCustomerForm" onsubmit="event.preventDefault(); updateCustomer();">
+            <label for="updateCustomerId">Customer ID:</label>
+            <input type="text" id="updateCustomerId" name="updateCustomerId" required readonly>
+            <div id="updateCustomerDetails"></div>
+            <div style="display: flex; gap: 15px; margin-top: 20px; width: 100%;">
+                <button type="button" onclick="showCustomerButtons()" style="flex: 1; background-color: #64748b; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-arrow-left"></i> Back</button>
+                <button type="submit" style="flex: 2; background-color: #2563eb; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-pen"></i> Update Customer</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="deleteCustomer" class="modal-template" style="display:none;">
+        <h2>Delete Customer</h2>
+        <form id="deleteCustomerForm" onsubmit="event.preventDefault(); deleteCustomer();">
+            <label for="deleteCustomerId">Customer ID:</label>
+            <input type="text" id="deleteCustomerId" name="deleteCustomerId" required>
+            <div style="display: flex; gap: 15px; margin-top: 20px; width: 100%;">
+                <button type="button" onclick="showCustomerButtons()" style="flex: 1; background-color: #64748b; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-arrow-left"></i> Back</button>
+                <button type="submit" style="flex: 2; background-color: #ef4444; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa fa-trash"></i> Delete Customer</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="viewCustomers" class="modal-template" style="display:none;">
+        <h2>View Customers</h2>
+        <div class="customer-search-bar">
+            <input type="text" id="customerSearchInput" placeholder="Search by ID, Name, Email, Phone" onkeyup="searchCustomersInView()">
+            <button type="button" onclick="searchCustomersInView()">Search</button>
+            <button type="button" onclick="clearCustomerSearch()">Clear</button>
+        </div>
+        <table id="customerList" class="customer-list">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
+      
+     
+    
+    <script src="./asset/js/admin.js?v=20260315-30"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+
+    
+</body>
+</html>
