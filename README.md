@@ -1,2 +1,3 @@
 # Burger-Shop
-Please contact to me for the password. thank you.
+
+Please contact me directly for the password. Thank you.
